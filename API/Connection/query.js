@@ -18,9 +18,6 @@ var member_user = null;
 var store_path = path.join(__dirname, 'hfc-key-store');
 var tx_id = null;
 
-
-
-
 /**
  * 
  * @param {*} adminUser 
@@ -78,10 +75,7 @@ function registerAdmin(adminUser, cb) {
         cb("Failed to enroll admin: "+ err);
         console.error('Failed to enroll admin: ' + err);
     });
-
 }
-
-
 
 /**
  * 
@@ -266,10 +260,6 @@ function invokeChaincode(username, chaincodeId, fcn, channelName, args, cb) {
 
 }
 
-
-
-
-
 function postTransaction(username, chaincodeId, fcn, args, cb) {
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({
@@ -322,38 +312,28 @@ function postTransaction(username, chaincodeId, fcn, args, cb) {
     });
 }
 
+invokeChaincode("user3", "metadata", "createRecord", "mychannel", ['record','ox123456','birth_certificate','3 Sep 2020 18:30'], function(err,res){
+    console.log(err,res);
+});
 
+postTransaction("user3", "metadata", "queryAll",["1","99"], function(err,res){
+    console.log(err,res);
+});
 
-// invokeChaincode("user3", "college", "createStudent", "mychannel", ['STUDENT62','SKIT74','Salman','Electronics','3'], function(err,res){
-//     console.log(err,res);
-// });
-
-
-//  postTransaction("user3", "college", "queryAll",["STUDENT1","STUDENT99"], function(err,res){
-//     console.log(err,res);
-//   });
-
-
-postTransaction("user3", "college", "richQuery",["stream","Electronics"], function(err,res){
+postTransaction("user3", "metadata", "richQuery",["ox123456"], function(err,res){
         console.log(err,res);
-      });
-    
+});
 
-// registerAdmin("admin",function(err,res){
-//     if(res){
-//          registerUser("admin","user3", function(err,res){
-
-//          });
-//      }
-// });
-
-
-
-
+registerAdmin("admin",function(err,res){
+    if(res){
+         registerUser("admin","user3", function(err,res){
+         });
+     }
+});
 
 module.exports = {
-invokeChaincode,
-registerAdmin,
-registerUser,
-postTransaction
+    invokeChaincode,
+    registerAdmin,
+    registerUser,
+    postTransaction
 }

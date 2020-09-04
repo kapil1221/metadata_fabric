@@ -1,5 +1,5 @@
 {
-	"name": "doc_metadata",
+	"name": "metadata",
 	"version": "1.0.0",
 	"description": "chaincode implemented in node.js",
 	"engines": {

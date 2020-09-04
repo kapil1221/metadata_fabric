@@ -5,7 +5,7 @@ const util = require('util');
 let Chaincode = class {
 
   async Init(stub) {
-    console.info('=========== Instantiated College chaincode ===========');
+    console.info('=========== Instantiated metadata chaincode ===========');
     return shim.success();
   }
 
@@ -27,7 +27,6 @@ let Chaincode = class {
     }
   }
   
-
   /**
    *
    * @param {*} stub
@@ -64,7 +63,8 @@ let Chaincode = class {
         let queryResults = await method(stub, JSON.stringify(queryString), thisClass);
         return queryResults; //shim.success(queryResults);
     }
-async getQueryResultForQueryString(stub, queryString, thisClass) {
+    
+    async getQueryResultForQueryString(stub, queryString, thisClass) {
 
         console.info('- getQueryResultForQueryString queryString:\n' + queryString)
         let resultsIterator = await stub.getQueryResult(queryString);
@@ -73,9 +73,9 @@ async getQueryResultForQueryString(stub, queryString, thisClass) {
         let results = await method(resultsIterator, false);
     
         return Buffer.from(JSON.stringify(results));
-}
+    }
 	
-async getAllResults(iterator, isHistory) {
+    async getAllResults(iterator, isHistory) {
         let allResults = [];
         while (true) {
           let res = await iterator.next();
@@ -138,11 +138,6 @@ async getAllResults(iterator, isHistory) {
     console.info('============= END : Create Record ===========');
   }
 
-
-
-
-
-
   // If you want to query all Incidents at once.
   async queryAll(stub, args) {
     if (args.length != 2) {
@@ -178,8 +173,6 @@ async getAllResults(iterator, isHistory) {
       }
     }
   }
-
-
 
 };
 

@@ -13,7 +13,7 @@
     },
     "bcrypt":{
         "saltRounds":10,
-        "myPlaintextPassword":"collegewar@1234",
+        "myPlaintextPassword":"metadatawar@1234",
         "someOtherPlaintextPassword":"not_bacon_notanythingelse"
     },
     "mail": {

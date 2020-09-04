@@ -61,7 +61,7 @@ echo
 
 sleep 5
 
-docker exec -e  "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" -e "CORE_PEER_ADDRESS=peer0.org1.example.com:7051" -e "CORE_PEER_LOCALMSPID=Org1MSP" peer0.org1.example.com peer chaincode install -n college -v 1.0.0 -l node -p /opt/gopath/src/github.com/chaincode/college/node/
+docker exec -e  "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" -e "CORE_PEER_ADDRESS=peer0.org1.example.com:7051" -e "CORE_PEER_LOCALMSPID=Org1MSP" peer0.org1.example.com peer chaincode install -n metadata -v 1.0.0 -l node -p /opt/gopath/src/github.com/chaincode/metadata/node/
 
 echo "##########################################################"
 echo "########    Instantiating Chaincode on channel     #######"
@@ -70,4 +70,4 @@ echo
 
 sleep 5
 
-docker exec -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" -e "CORE_PEER_ADDRESS=peer0.org1.example.com:7051" -e "CORE_PEER_LOCALMSPID=Org1MSP" peer0.org1.example.com peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n college -l node -v 1.0.0 -c '{"Args":[""]}' -P "OR ('Org1MSP.peer','Org2MSP.peer')"
+docker exec -e "CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" -e "CORE_PEER_ADDRESS=peer0.org1.example.com:7051" -e "CORE_PEER_LOCALMSPID=Org1MSP" peer0.org1.example.com peer chaincode instantiate -o orderer.example.com:7050 -C mychannel -n metadata -l node -v 1.0.0 -c '{"Args":[""]}' -P "OR ('Org1MSP.peer','Org2MSP.peer')"
